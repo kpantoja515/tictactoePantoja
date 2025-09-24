@@ -1,42 +1,218 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+/* Reset default browser margin */
+body {
+  margin: 0;
+  background-color: #222;
+  font-family: Arial, sans-serif;
+  color: #fff;
+  overflow: hidden;
+}
+
+/* Main container */
+.app-container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* Wrapper for game */
+.game-wrapper {
+  background: rgba(40, 40, 40, 0.85);
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Title */
+.game-title {
+  font-size: 32px;
+  margin: 0;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+/* Status text */
+.game-status {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+.winner-text {
+  color: #28a745;
 }
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.draw-text {
+  color: #ffc107;
 }
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.next-player {
+  color: #fff;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.player.x {
+  color: #4ea8de;
+}
+.player.o {
+  color: #f77f00;
 }
 
-.card {
-  padding: 2em;
+/* Game layout */
+.game-content {
+  display: flex;
+  gap: 20px;
 }
 
-.read-the-docs {
-  color: #888;
+/* Board */
+.game-board {
+  display: flex;
+  flex-direction: column;
+}
+.board-row {
+  display: flex;
+}
+
+/* Squares */
+.square {
+  width: 60px;
+  height: 60px;
+  font-size: 24px;
+  margin: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background-color: #444;
+  border: 2px solid #888;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+.square:hover {
+  background-color: #666;
+}
+.xo {
+  color: white;
+  font-weight: bold;
+}
+
+/* Game info / history */
+.game-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.history-list {
+  padding-left: 20px;
+}
+.history-btn {
+  background: #555;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 2px 0;
+  transition: background 0.2s ease;
+}
+.history-btn:hover {
+  background: #666;
+}
+.history-btn.active {
+  background: #28a745;
+  font-weight: bold;
+}
+.reset-btn {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.reset-btn:hover {
+  background: #0056b3;
+}
+
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Modal Box */
+.modal {
+  background: #333;
+  padding: 20px 30px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5);
+}
+.modal-title {
+  margin: 0 0 10px 0;
+}
+.modal-text {
+  margin: 0 0 20px 0;
+  font-size: 18px;
+}
+.winner-name.x {
+  color: #4ea8de;
+}
+.winner-name.o {
+  color: #f77f00;
+}
+
+/* Modal Buttons */
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+.play-again-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  background: #28a745;
+  color: #fff;
+  transition: background 0.2s ease;
+}
+.play-again-btn:hover {
+  background: #218838;
+}
+.continue-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  background: #dc3545;
+  color: #fff;
+  transition: background 0.2s ease;
+}
+.continue-btn:hover {
+  background: #c82333;
+}
+
+/* Ensure canvas (Snake) stays in background */
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;
 }
